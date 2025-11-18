@@ -29,6 +29,7 @@
             --text-muted: #b8b8d1;
         }
 
+        /* Reset dan Box-sizing */
         * {
             margin: 0;
             padding: 0;
@@ -41,11 +42,15 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth; /* Tambahkan smooth scroll untuk navigasi internal */
         }
 
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
         }
+
+        /* Utility Class */
+        .text-center { text-align: center; }
 
         /* Floating Animation */
         @keyframes float {
@@ -130,13 +135,12 @@
 
         /* Hero Section */
         .hero {
-            /* Padding vertikal dikurangi dari 120px menjadi 80px */
-            min-height: 80vh; /* Mengurangi tinggi minimum untuk efisiensi ruang */
+            min-height: 85vh; /* Sedikit ditinggikan lagi */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 80px 5% 60px; /* Padding atas dikurangi, bawah dikurangi */
+            padding: 120px 5% 60px; /* Jaga agar tidak tertutup nav */
             background: var(--dark);
             position: relative;
             overflow: hidden;
@@ -177,9 +181,9 @@
         }
 
         .hero-logo {
-            width: 100px; /* Logo diperkecil sedikit */
+            width: 100px; 
             height: 100px;
-            margin: 0 auto 30px; /* Margin dikurangi */
+            margin: 0 auto 30px; 
             background: var(--gradient-1);
             border-radius: 50%;
             display: flex;
@@ -192,7 +196,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(3.5rem, 8vw, 6rem); /* Dibuat sedikit lebih besar */
             background: linear-gradient(135deg, #667eea 0%, #f5576c 50%, #00f2fe 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
@@ -203,13 +207,16 @@
         }
 
         .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
             color: var(--text-muted);
             margin-bottom: 40px;
             font-weight: 300;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Style Tombol (dengan perbaikan simetri) */
+        /* Style Tombol */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -224,14 +231,14 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            margin: 0 7.5px; /* Margin horizontal untuk simetri */
+            margin: 0 10px; /* Margin horizontal yang lebih jelas */
+            border: none;
         }
 
         .btn-primary {
             background: var(--gradient-1);
             color: white;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); 
-            border: 2px solid transparent; 
         }
 
         .btn-primary:hover {
@@ -251,6 +258,11 @@
             border-color: var(--purple); 
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); 
+        }
+        
+        /* Button with Icon */
+        .btn i {
+            margin-right: 8px;
         }
 
         /* Sections */
@@ -302,6 +314,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            z-index: 1;
         }
 
         .service-grid {
@@ -335,6 +348,7 @@
             bottom: 0;
             border-radius: 24px;
             padding: 2px;
+            /* Border Gradient Effect */
             background: linear-gradient(135deg, transparent, rgba(102, 126, 234, 0.5), transparent);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -347,13 +361,14 @@
             opacity: 1;
         }
 
+        /* Mengatur warna gradient untuk border hover */
         .service-card:nth-child(1) { --card-gradient: var(--gradient-1); }
         .service-card:nth-child(2) { --card-gradient: var(--gradient-2); }
         .service-card:nth-child(3) { --card-gradient: var(--gradient-3); }
         .service-card:nth-child(4) { --card-gradient: var(--gradient-4); }
         .service-card:nth-child(5) { --card-gradient: var(--gradient-5); }
         .service-card:nth-child(6) { --card-gradient: var(--gradient-6); }
-
+        
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
@@ -392,6 +407,7 @@
         .service-card ul {
             list-style: none;
             margin: 25px 0;
+            padding: 0 20px;
             text-align: left;
         }
 
@@ -399,13 +415,14 @@
             padding: 12px 0;
             color: var(--text-muted);
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* Untuk perataan ikon dan teks */
             gap: 12px;
         }
 
         .service-card ul li i {
             color: var(--purple);
             font-size: 1.1rem;
+            margin-top: 3px;
         }
 
         .btn-card {
@@ -413,8 +430,11 @@
             margin-top: 20px;
             background: var(--card-gradient);
             border: none;
-            /* Override margin horizontal */
-            margin: 20px 0 0 0; 
+            margin: 20px 0 0 0; /* Override margin horizontal */
+        }
+        
+        .btn-card:hover {
+            box-shadow: 0 15px 40px var(--purple-shadow, rgba(102, 126, 234, 0.6));
         }
 
         /* Gallery Section */
@@ -424,7 +444,7 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Min Lebar dikurangi sedikit agar lebih fleksibel */
             gap: 25px;
             max-width: 1400px;
             margin: 0 auto;
@@ -462,13 +482,13 @@
         }
 
         .gallery-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.03); /* Perubahan skala dikurangi agar tidak terlalu besar */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             z-index: 10;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.2);
+            transform: scale(1.1); /* Perubahan zoom dikurangi */
         }
 
         .gallery-overlay {
@@ -518,6 +538,7 @@
             opacity: 0.2;
             bottom: -250px;
             right: -250px;
+            z-index: 1;
         }
 
         .contact > p {
@@ -550,31 +571,13 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s;
+            height: 100%; /* Agar info card memiliki tinggi yang sama dengan form */
         }
 
         .info-card:hover {
-            transform: translateX(10px);
+            transform: translateX(0); /* Menghilangkan translate X pada hover info-card, karena tidak terlalu cocok untuk konten statis */
             border-color: rgba(102, 126, 234, 0.5);
-        }
-
-        .info-card .icon {
-            font-size: 2.5rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-        }
-
-        .info-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-        }
-
-        .info-card p {
-            color: var(--text-muted);
-            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .contact-item {
@@ -582,11 +585,22 @@
             gap: 20px;
             padding: 20px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            align-items: center;
+            align-items: flex-start;
         }
 
         .contact-item:last-child {
             border-bottom: none;
+        }
+
+        .contact-item h3 {
+             font-size: 1.3rem;
+             margin-bottom: 5px;
+             color: var(--text-primary);
+        }
+        
+        .contact-item p {
+            color: var(--text-muted);
+            line-height: 1.5;
         }
 
         .icon-small {
@@ -601,6 +615,7 @@
             display: flex;
             gap: 15px;
             margin-top: 15px;
+            flex-wrap: wrap; /* Agar responsif di layar kecil */
         }
 
         .social-links a {
@@ -641,6 +656,22 @@
         .form-group {
             margin-bottom: 25px;
         }
+        
+        /* Styling untuk placeholder */
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(184, 184, 209, 0.7); /* Lebih terang dari text-muted */
+        }
+        
+        /* Styling untuk dropdown default */
+        .form-group select {
+            appearance: none; /* Hilangkan default arrow di beberapa browser */
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b8b8d1'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 15px;
+        }
 
         .form-group input,
         .form-group select,
@@ -669,6 +700,28 @@
             resize: vertical;
             min-height: 120px;
         }
+        
+        /* Styling untuk tombol submit */
+        .btn-submit {
+            background: var(--gradient-1);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); 
+        }
+
+        .btn-submit:hover {
+            background: var(--gradient-1);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6); 
+        }
+
 
         /* Footer */
         footer {
@@ -678,11 +731,21 @@
             color: var(--text-muted);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        footer a {
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 500;
+        }
 
         /* Responsive */
         @media (max-width: 992px) {
             .contact-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .info-card {
+                height: auto; /* Hilangkan fixed height di mobile */
             }
         }
 
@@ -692,7 +755,7 @@
             }
 
             .hero {
-                padding-top: 100px; /* Tambahan padding agar tidak tertutup nav */
+                padding-top: 120px; 
                 min-height: 70vh;
             }
 
@@ -701,15 +764,28 @@
             }
             
             .hero-content > * {
-                margin: 7.5px 0;
+                margin-bottom: 25px;
             }
 
             .service-grid,
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .btn {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .contact-form-wrapper {
+                padding: 30px;
+            }
+            
+            .info-card {
+                padding: 25px;
+            }
         }
-
+        
         /* Scroll Animation */
         .fade-in {
             opacity: 0;
@@ -736,7 +812,7 @@
             <li><a href="#galeri">Galeri</a></li>
             <li><a href="#kontak">Kontak</a></li>
         </ul>
-    </nav>
+        </nav>
 
     <section class="hero" id="hero">
         <div class="hero-content">
@@ -744,23 +820,25 @@
                 <i class="fas fa-camera"></i>
             </div>
             <h1>Tecnik Foto</h1>
-            <p>Abadikan Setiap Momen Berharga dengan Sentuhan Seni & Kreativitas</p>
+            <p>Abadikan Setiap Momen Berharga dengan Sentuhan **Seni & Kreativitas** Kami. Solusi Dokumentasi Terbaik Anda.</p>
             <div>
-                <button class="btn btn-primary" onclick="document.getElementById('layanan').scrollIntoView({behavior:'smooth'})">
-                    Jelajahi Layanan
-                </button>
-                <a href="#kontak" class="btn btn-outline">Hubungi Kami</a>
+                <a href="#layanan" class="btn btn-primary">
+                    <i class="fas fa-arrow-down"></i> Jelajahi Layanan
+                </a>
+                <a href="#kontak" class="btn btn-outline">
+                    <i class="fas fa-phone-alt"></i> Hubungi Kami
+                </a>
             </div>
         </div>
     </section>
     
     <section class="about fade-in" id="tentang">
         <h2 class="section-heading">Tentang Kami</h2>
-        <p>Kami adalah tim kreatif yang **passionate** dalam mengabadikan momen-momen spesial Anda. Dengan pengalaman sejak 2020, kami menghadirkan karya fotografi dan videografi yang **elegan, modern, dan penuh dengan emosi**. Percayakan dokumentasi momen berharga Anda kepada kami.</p>
+        <p>Kami adalah tim kreatif yang **passionate** dalam mengabadikan momen-momen spesial Anda. Dengan pengalaman sejak **2020**, kami menghadirkan karya fotografi dan videografi yang **elegan, modern, dan penuh dengan emosi**. Percayakan dokumentasi momen berharga Anda kepada kami untuk hasil yang tak terlupakan.</p>
     </section>
 
     <section class="services fade-in" id="layanan">
-        <h2 class="section-heading">Paket Layanan</h2>
+        <h2 class="section-heading">Paket Layanan Terbaik</h2>
         <div class="service-grid">
             
             <div class="service-card">
@@ -771,88 +849,87 @@
                 <p class="price">Rp 300K</p>
                 <ul>
                     <li><i class="fas fa-check-circle"></i> **20 Foto Edit Profesional**</li>
-                    <li><i class="fas fa-check-circle"></i> 1 Video Cinematic</li>
-                    <li><i class="fas fa-check-circle"></i> Free Bingkai & Cetak</li>
-                    <li><i class="fas fa-check-circle"></i> Studio/Outdoor</li>
+                    <li><i class="fas fa-check-circle"></i> 1 Video Cinematic (Highlight)</li>
+                    <li><i class="fas fa-check-circle"></i> Free Bingkai & Cetak A4</li>
+                    <li><i class="fas fa-check-circle"></i> Sesi Foto Studio/Outdoor</li>
                 </ul>
                 <a class="btn btn-primary btn-card" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Wisuda">Pesan Sekarang</a>
             </div>
 
             <div class="service-card">
-                <div class="service-icon">
+                <div class="service-icon" style="--card-gradient: var(--gradient-2);">
                     <i class="fas fa-id-card"></i>
                 </div>
                 <h3>Foto Ijazah</h3>
                 <p class="price">Rp 25K</p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> 3 Lembar 3x4</li>
-                    <li><i class="fas fa-check-circle"></i> 1 Lembar 4x6</li>
-                    <li><i class="fas fa-check-circle"></i> **Background Merah/Biru**</li>
-                    <li><i class="fas fa-check-circle"></i> Free 1 Sesi Foto Bebas</li>
+                    <li><i class="fas fa-check-circle"></i> 3 Lembar Cetak Ukuran 3x4</li>
+                    <li><i class="fas fa-check-circle"></i> 1 Lembar Cetak Ukuran 4x6</li>
+                    <li><i class="fas fa-check-circle"></i> **Background Merah/Biru** (Bisa Pilih)</li>
+                    <li><i class="fas fa-check-circle"></i> Free 1 Sesi Foto Bebas Pilihan</li>
                 </ul>
-                <a class="btn btn-primary btn-card" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Foto%20Ijazah">Pesan Sekarang</a>
+                <a class="btn btn-primary btn-card" style="background: var(--gradient-2); box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Foto%20Ijazah">Pesan Sekarang</a>
             </div>
 
             <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-book"></i>
+                <div class="service-icon" style="--card-gradient: var(--gradient-3);">
+                    <i class="fas fa-book-open"></i>
                 </div>
-                <h3>Gallery Foto</h3>
+                <h3>Gallery Foto/Yearbook</h3>
                 <p class="price">Rp 600K</p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Pemotretan Full Day</li>
-                    <li><i class="fas fa-check-circle"></i> **50 Foto Editan**</li>
-                    <li><i class="fas fa-check-circle"></i> Desain Buku Tahunan</li>
-                    <li><i class="fas fa-check-circle"></i> BTS Documentation</li>
+                    <li><i class="fas fa-check-circle"></i> Pemotretan **Full Day**</li>
+                    <li><i class="fas fa-check-circle"></i> **50 Foto Editan** Premium</li>
+                    <li><i class="fas fa-check-circle"></i> Desain Buku Tahunan (Optional)</li>
+                    <li><i class="fas fa-check-circle"></i> BTS Documentation (Video)</li>
                 </ul>
-                <a class="btn btn-primary btn-card" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Gallery">Pesan Sekarang</a>
+                <a class="btn btn-primary btn-card" style="background: var(--gradient-3); box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Gallery">Pesan Sekarang</a>
             </div>
-
+            
             <div class="service-card">
-                <div class="service-icon">
+                <div class="service-icon" style="--card-gradient: var(--gradient-4);">
                     <i class="fas fa-users"></i>
                 </div>
-                <h3>Event Sekolah</h3>
+                <h3>Event Sekolah/Umum</h3>
                 <p class="price">Rp 550K</p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Dokumentasi **4 Jam**</li>
-                    <li><i class="fas fa-check-circle"></i> Foto & Video</li>
-                    <li><i class="fas fa-check-circle"></i> Highlight Cinematic</li>
-                    <li><i class="fas fa-check-circle"></i> All Raw Files</li>
+                    <li><i class="fas fa-check-circle"></i> Dokumentasi **4 Jam** Acara</li>
+                    <li><i class="fas fa-check-circle"></i> Foto dan Video Full Event</li>
+                    <li><i class="fas fa-check-circle"></i> Highlight Cinematic 1 Menit</li>
+                    <li><i class="fas fa-check-circle"></i> All Raw Files Diberikan</li>
                 </ul>
-                <a class="btn btn-primary btn-card" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Event">Pesan Sekarang</a>
+                <a class="btn btn-primary btn-card" style="background: var(--gradient-4); box-shadow: 0 5px 15px rgba(67, 233, 123, 0.4);" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Event">Pesan Sekarang</a>
             </div>
-
+            
             <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h3>Pernikahan</h3>
+                <div class="service-icon" style="--card-gradient: var(--gradient-5);">
+                    <i class="fas fa-ring"></i> </div>
+                <h3>Pernikahan (Wedding)</h3>
                 <p class="price">Rp 3.5JT</p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Liputan **8 Jam**</li>
-                    <li><i class="fas fa-check-circle"></i> 100+ Foto Premium</li>
-                    <li><i class="fas fa-check-circle"></i> Video 5-7 Menit</li>
-                    <li><i class="fas fa-check-circle"></i> Album Eksklusif</li>
-                    <li><i class="fas fa-check-circle"></i> **Bonus Pre-Wedding**</li>
+                    <li><i class="fas fa-check-circle"></i> Liputan **8 Jam** (Akad & Resepsi)</li>
+                    <li><i class="fas fa-check-circle"></i> 100+ Foto Premium Edit</li>
+                    <li><i class="fas fa-check-circle"></i> Video Cinematic 5-7 Menit</li>
+                    <li><i class="fas fa-check-circle"></i> Album Foto Eksklusif</li>
+                    <li><i class="fas fa-check-circle"></i> **Bonus Sesi Pre-Wedding**</li>
                 </ul>
-                <a class="btn btn-primary btn-card" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Pernikahan">Pesan Sekarang</a>
+                <a class="btn btn-primary btn-card" style="background: var(--gradient-5); box-shadow: 0 5px 15px rgba(250, 112, 154, 0.4);" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Pernikahan">Pesan Sekarang</a>
             </div>
-
+            
             <div class="service-card">
-                <div class="service-icon">
+                <div class="service-icon" style="--card-gradient: var(--gradient-6);">
                     <i class="fas fa-birthday-cake"></i>
                 </div>
-                <h3>Ulang Tahun</h3>
+                <h3>Pesta Ulang Tahun</h3>
                 <p class="price">Rp 100K</p>
                 <ul>
-                    <li><i class="fas fa-check-circle"></i> Dokumentasi 4 Jam</li>
-                    <li><i class="fas fa-check-circle"></i> 50 Foto Edit</li>
-                    <li><i class="fas fa-check-circle"></i> Video 2-3 Menit</li>
-                    <li><i class="fas fa-check-circle"></i> Konsultasi Dekorasi</li>
-                    <li><i class="fas fa-check-circle"></i> Raw Files</li>
+                    <li><i class="fas fa-check-circle"></i> Dokumentasi 4 Jam Acara</li>
+                    <li><i class="fas fa-check-circle"></i> 50 Foto Edit Pilihan Terbaik</li>
+                    <li><i class="fas fa-check-circle"></i> Video Pendek (2-3 Menit)</li>
+                    <li><i class="fas fa-check-circle"></i> Konsultasi Konsep Dekorasi</li>
+                    <li><i class="fas fa-check-circle"></i> All Raw Files Diberikan</li>
                 </ul>
-                <a class="btn btn-primary btn-card" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Ulang%20Tahun">Pesan Sekarang</a>
+                <a class="btn btn-primary btn-card" style="background: var(--gradient-6); box-shadow: 0 5px 15px rgba(48, 207, 208, 0.4);" href="https://wa.me/6289694213328?text=Halo%20saya%20ingin%20pesan%20Paket%20Ulang%20Tahun">Pesan Sekarang</a>
             </div>
         </div>
     </section>
@@ -863,57 +940,57 @@
             <div class="gallery-item">
                 <img src="aset foto/CONTOH FOTO ANGKATAN 1.jpg" alt="Foto Angkatan">
                 <div class="gallery-overlay">
-                    <h4>Momen Kelulusan</h4>
-                    <p>Potret kebahagiaan kelulusan yang berkesan.</p>
+                    <h4>Foto Angkatan/Kelulusan</h4>
+                    <p>Potret kebahagiaan dan kebersamaan di momen kelulusan.</p>
                 </div>
             </div>
             
             <div class="gallery-item">
                 <img src="aset foto/ulang tahun.jpg" alt="Foto Ulang Tahun">
                 <div class="gallery-overlay">
-                    <h4>dokumentasikan Momen</h4>
-                    <p>Syukuran atas bertambahnya usia.</p>
+                    <h4>Pesta Ulang Tahun</h4>
+                    <p>Mendokumentasikan sukacita syukuran bertambahnya usia.</p>
                 </div>
             </div>
 
             <div class="gallery-item">
-                <img src="aset foto/pas foto.jpg" alt="Foto Ijazah">
+                <img src="aset foto/pas foto.jpg" alt="Pas Foto Formal">
                 <div class="gallery-overlay">
-                    <h4>Pas Foto</h4>
-                    <p>Pengabadian Dokumentasi.</p>
+                    <h4>Pas Foto Formal & Ijazah</h4>
+                    <p>Pengabadian dokumentasi formal dengan hasil terbaik.</p>
                 </div>
             </div>
 
             <div class="gallery-item">
-                <img src="aset foto/foto produk.jpg" alt="Foto Produk">
+                <img src="aset foto/foto produk.jpg" alt="Fotografi Produk">
                 <div class="gallery-overlay">
-                    <h4>Fotografi Produk</h4>
-                    <p>Foto produk yang menawan dan profesional.</p>
+                    <h4>Fotografi Produk/Komersial</h4>
+                    <p>Foto produk yang menawan dan profesional untuk bisnis Anda.</p>
                 </div>
             </div>
 
             <div class="gallery-item">
-                <img src="aset foto/acara sekolah.jpg" alt="Foto Event">
+                <img src="aset foto/acara sekolah.jpg" alt="Dokumentasi Event">
                 <div class="gallery-overlay">
                     <h4>Dokumentasi Event</h4>
-                    <p>Liputan lengkap acara, dari seminar hingga konser.</p>
+                    <p>Liputan lengkap acara sekolah, seminar, atau konser.</p>
                 </div>
             </div>
 
             <div class="gallery-item">
-                <img src="aset foto/weding.jpg" alt="Foto Pre-Wedding">
+                <img src="aset foto/weding.jpg" alt="Foto Pernikahan">
                 <div class="gallery-overlay">
-                    <h4>Sesi Pre-Wedding</h4>
-                    <p>Kisah cinta dalam bidikan yang romantis.</p>
+                    <h4>Sesi Pernikahan & Pre-Wedding</h4>
+                    <p>Kisah cinta abadi dalam bidikan yang romantis dan elegan.</p>
                 </div>
             </div>
-
+            
         </div>
     </section>
 
     <section class="contact fade-in" id="kontak">
         <h2 class="section-heading">Hubungi Kami</h2>
-        <p>Siap untuk mengabadikan momen spesial Anda? Hubungi kami atau isi formulir di bawah ini untuk konsultasi dan pemesanan layanan.</p>
+        <p>Siap untuk mengabadikan momen spesial Anda? Hubungi kami atau isi formulir di bawah ini untuk konsultasi dan pemesanan layanan. Kami akan merespon secepatnya!</p>
         
         <div class="contact-container">
             <div class="contact-info">
@@ -922,7 +999,7 @@
                         <i class="fas fa-map-marker-alt icon-small"></i>
                         <div>
                             <h3>Alamat Studio</h3>
-                            <p>Jl. Kreativitas No. 45, Kota Fotografi, Indonesia</p>
+                            <p>Jl. Kreativitas No. 45, Kota Fotografi, Indonesia (Silakan chat untuk lokasi detail)</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -936,14 +1013,18 @@
                         <i class="fas fa-phone-alt icon-small"></i>
                         <div>
                             <h3>Nomor Telepon</h3>
-                            <p>+62 896-9421-3328 (Whatsapp Aktif)</p>
+                            <p>+62 896-9421-3328 **(Whatsapp Aktif)**</p>
                         </div>
                     </div>
                     
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-                        <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
-                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <div class="contact-item" style="border-bottom: none; display: block;">
+                        <h3>Sosial Media Kami</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                            <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+                            <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -958,35 +1039,43 @@
                         <input type="email" name="email" placeholder="Email Anda" required>
                     </div>
                     <div class="form-group">
+                        <input type="tel" name="telepon" placeholder="Nomor Telepon/HP (Wajib diisi)" required>
+                    </div>
+                    <div class="form-group">
                         <select name="layanan" required>
-                            <option value="" disabled selected>Pilih Jenis Layanan</option>
+                            <option value="" disabled selected>Pilih Jenis Layanan yang Diminati</option>
                             <option value="wisuda">Paket Wisuda</option>
                             <option value="ijazah">Foto Ijazah</option>
                             <option value="gallery">Gallery Foto/Buku Tahunan</option>
-                            <option value="pernikahan">Pernikahan</option>
+                            <option value="event">Event Sekolah/Umum</option>
+                            <option value="pernikahan">Pernikahan (Wedding)</option>
+                            <option value="ulang_tahun">Pesta Ulang Tahun</option>
+                            <option value="produk">Fotografi Produk/Komersial</option>
                             <option value="lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea name="pesan" placeholder="Detail Pesan Anda..." required></textarea>
+                        <textarea name="pesan" placeholder="Tuliskan detail pertanyaan atau kebutuhan Anda di sini..." required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                    <button type="submit" class="btn btn-submit">
+                         <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Tecnik Foto. Semua Hak Cipta Dilindungi.</p>
+        <p>&copy; 2024 Tecnik Foto. Semua Hak Cipta Dilindungi. Dibuat dengan <i class="fas fa-heart" style="color: var(--pink);"></i> oleh <a href="https://yourwebsite.com">Creative Team</a>.</p>
     </footer>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const faders = document.querySelectorAll('.fade-in');
 
             const appearOptions = {
-                threshold: 0,
-                rootMargin: "0px 0px -100px 0px" 
+                threshold: 0.1, // Mulai terlihat ketika 10% elemen masuk viewport
+                rootMargin: "0px 0px -50px 0px" // Kurangi 50px dari bawah agar lebih cepat muncul
             };
 
             const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
